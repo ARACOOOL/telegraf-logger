@@ -1,6 +1,5 @@
 {
   "name": "aracoool/telegraf-logger",
-  "version": "1.0.0",
   "description": "Helps to collects a data for telegraf and put it into the log files",
   "keywords": ["log", "telegraf", "influxdb"],
   "type": "library",
