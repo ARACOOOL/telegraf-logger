@@ -18,9 +18,21 @@ class Profiler
      * @var WriteStreamInterface
      */
     private $stream;
+    /**
+     * @var int
+     */
     private $startMemory;
+    /**
+     * @var float
+     */
     private $startTime;
-    private $data;
+    /**
+     * @var array
+     */
+    private $data = ['tags' => [], 'fields' => []];
+    /**
+     * @var string
+     */
     private $name;
 
     /**
@@ -49,11 +61,31 @@ class Profiler
      */
     public function finish()
     {
-        $this->stream->write($this->measurement, array_merge($this->data, [
-            'app'          => $this->name,
-            'time_usage'   => microtime(true) - $this->startTime,
-            'memory_usage' => memory_get_usage() - $this->startMemory
+        $this->stream->write($this->measurement, array_merge_recursive($this->data, [
+            'tags'   => [
+                'app' => $this->name
+            ],
+            'fields' => [
+                'time_usage'   => microtime(true) - $this->startTime,
+                'memory_usage' => memory_get_usage() - $this->startMemory
+            ]
         ]));
+    }
+
+    /**
+     * @param array $tags
+     */
+    public function addTags(array $tags)
+    {
+        $this->write(['tags' => $tags]);
+    }
+
+    /**
+     * @param array $fields
+     */
+    public function addFields(array $fields)
+    {
+        $this->write(['fields' => $fields]);
     }
 
     /**
