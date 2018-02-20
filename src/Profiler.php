@@ -18,6 +18,10 @@ class Profiler
      * @var WriteStreamInterface
      */
     private $stream;
+    private $startMemory;
+    private $startTime;
+    private $data;
+    private $name;
 
     /**
      * Profiler constructor.
@@ -31,10 +35,32 @@ class Profiler
     }
 
     /**
+     * @param $appName
+     */
+    public function start($appName)
+    {
+        $this->name        = $appName;
+        $this->startTime   = microtime(true);
+        $this->startMemory = memory_get_usage();
+    }
+
+    /**
+     *
+     */
+    public function finish()
+    {
+        $this->stream->write($this->measurement, array_merge($this->data, [
+            'app'          => $this->name,
+            'time_usage'   => microtime(true) - $this->startTime,
+            'memory_usage' => memory_get_usage() - $this->startMemory
+        ]));
+    }
+
+    /**
      * @param array $data
      */
     public function write(array $data)
     {
-        $this->stream->write($this->measurement, $data);
+        $this->data = array_merge($this->data, $data);
     }
 }
