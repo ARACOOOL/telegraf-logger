@@ -54,7 +54,7 @@ class FileStream extends WriteStream
         }
 
         if (filesize($defaultLogFile) >= self::FILE_MAX_SIZE) {
-            return $this->logsDir . DIRECTORY_SEPARATOR . 'logs_' . $this->filesInDir() . '.log';
+            rename($this->logsDir . DIRECTORY_SEPARATOR . 'logs.log', $this->logsDir . DIRECTORY_SEPARATOR . 'logs_' . $this->filesInDir() . '.log');
         }
 
         return $defaultLogFile;
