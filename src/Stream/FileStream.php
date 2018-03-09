@@ -41,6 +41,7 @@ class FileStream extends WriteStream
         $fp = fopen($this->getFilePath(), 'a+b');
         fwrite($fp, $this->getFormatter()->format($measurement, $data) . PHP_EOL);
         fclose($fp);
+        @chmod($this->getFilePath(), 0664);
     }
 
     /**
