@@ -8,7 +8,7 @@ use Neat\Profiler\Formatter;
 use Neat\Profiler\Profiler;
 use Neat\Profiler\Stream\FileStream;
 
-$profiler = new Profiler('neat_php_apps', new FileStream(__DIR__ . '/logs', new Formatter()));
+$profiler = new Profiler('measurement_name', new FileStream(__DIR__ . '/logs', new Formatter()));
 // your code
 
 $profiler->finish();
