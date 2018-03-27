@@ -13,3 +13,6 @@ $profiler = new Profiler('measurement_name', new FileStream(__DIR__ . '/logs', n
 
 $profiler->finish();
 ```
+## Telegraf input setting
+
+https://github.com/influxdata/telegraf/tree/master/plugins/inputs/tail
