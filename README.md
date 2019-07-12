@@ -1,5 +1,5 @@
 # Logger for telegraf
-Helps to collects a data for telegraf. Puts the data into the log files.
+Helps to collect a data for telegraf. Puts the data into log files.
 
 ## Usage
 
